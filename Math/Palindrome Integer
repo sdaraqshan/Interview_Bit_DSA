@@ -1,0 +1,29 @@
+Problem Description
+
+Determine whether an integer is a palindrome. Do this without extra space.
+A palindrome integer is an integer x for which reverse(x) = x where reverse(x) is x with its digit reversed. Negative numbers are not palindromic.
+Example :
+Input : 12121
+Output : True
+Input : 123
+Output : False
+
+------------------------------------------------------
+SOLUTION IN C++ :
+
+int Solution::isPalindrome(int A) {
+    int sum=0,i,r;
+    int temp=A;
+    if(A<0)
+        return 0;
+    while(A>0)
+    {
+        r=A%10;
+        sum=(sum*10)+r;
+        A=A/10;
+    }
+    if(sum==temp)
+        return 1;
+    else 
+        return 0;
+}
