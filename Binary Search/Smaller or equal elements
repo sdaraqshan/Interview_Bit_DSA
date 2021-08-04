@@ -1,0 +1,89 @@
+Problem Description
+
+Given an sorted array A of size N. Find number of elements which are less than or equal to B.
+NOTE: Expected Time Complexity O(log N)
+
+Problem Constraints
+1 <= N <= 106
+1 <= A[i], B <= 109
+
+Input Format
+First agument is an integer array A of size N.
+Second argument is an integer B.
+
+Output Format
+Return an integer denoting the number of elements which are less than or equal to B.
+
+Example Input
+Input 1:
+ A = [1, 3, 4, 4, 6]
+ B = 4
+Input 2:
+ A = [1, 2, 5, 5]
+ B = 3
+
+Example Output
+Output 1:
+ 4
+Output 2:
+ 2
+
+Example Explanation
+Explanation 1:
+ Elements (1, 3, 4, 4) are less than or equal to 4.
+Explanation 2:
+ Elements (1, 2) are less than or equal to 3.
+ 
+ ------------------------------------------------------------------------
+ 
+ SOLUTION IN C++:
+ 
+ int Solution::solve(vector<int> &A, int B) {
+    int i=0,n;
+    n=A.size();
+    
+    int left = 0, right = n;
+ 
+    int mid;
+    while (left < right) {
+        mid = (right + left) >> 1;
+ 
+        // Check if key is present in array
+        if (A[mid] == B) {
+           
+            // If duplicates are present it returns
+            // the position of last element
+            while (mid + 1 < n && A[mid + 1] == B)
+                mid++;
+            break;
+        }
+ 
+        // If key is smaller, ignore right half
+        else if (A[mid] > B)
+            right = mid;
+ 
+        // If key is greater, ignore left half
+        else
+            left = mid + 1;
+    }
+ 
+    // If key is not found
+    // in array then it will be
+    // before mid
+    while (mid > -1 && A[mid] > B)
+        mid--;
+ 
+    // Return mid + 1 because of 0-based indexing
+    // of array
+    return mid + 1;
+}
+    /*while(i<n)
+    {
+        if(A[i]==B && A[i]!=A[i+1])
+            return i;
+        if(A[i]>B)
+            return i;
+        else
+        i++;
+    }
+}*/
